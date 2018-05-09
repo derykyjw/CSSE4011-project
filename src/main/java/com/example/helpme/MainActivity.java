@@ -231,7 +231,7 @@ public class MainActivity extends BaseActivity {
         super.onStart();
 
         FirebaseDatabase.getInstance().getReference().child("user-posts")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -245,6 +245,7 @@ public class MainActivity extends BaseActivity {
                     Post post = new Post(data.get("uid"), data.get("author"),
                             data.get("lat"), data.get("lng"), data.get("time"));
 
+                    System.out.println(post.author);
                     if(users.contains(post.author)){
                         posts.set(users.indexOf(post.author), "user: " + post.author +
                                 " lat: " + post.lat + " lng: " + post.lng + "time: " + post.time);
